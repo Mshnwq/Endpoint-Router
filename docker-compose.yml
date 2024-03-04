@@ -1,0 +1,18 @@
+version: '3.7'
+
+networks:
+  npm_network:
+    external: true
+
+services:
+  custom-router:
+    container_name: custom-router
+    image: scratch-go-router:latest
+    volumes:
+      - ./proxy.log:/proxy.log
+    ports:
+      - "5000:5000"
+    networks:
+      npm_network:
+        ipv4_address: 172.100.0.150
+    restart: unless-stopped
